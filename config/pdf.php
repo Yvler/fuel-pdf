@@ -16,7 +16,7 @@ return array(
 		'tcpdf'		=> array(
 			'includes'	=> array(
 				// Relative to lib path
-				'tcpdf/config/lang/eng.php',
+				'tcpdf/config/tcpdf_config.php',
 				'tcpdf/tcpdf.php',
 			),
 			'class'		=> 'TCPDF',
