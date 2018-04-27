@@ -133,7 +133,15 @@ class Pdf {
 	public function camel_to_underscore($string)
 	{
 		$string[0]	= strtolower($string[0]);
-		$function	= create_function('$c', 'return "_" . strtolower($c[1]);');
+		if (function_exists('create_function')) {
+		    $function	= create_function('$c', 'return "_" . strtolower($c[1]);');
+		}
+		else {
+		    $delimiter = "_";
+		    $function = function($c) use ($delimiter) {
+			return $delimiter . strtolower($c[1]);
+		    };
+		}
 		
 		return preg_replace_callback('/([A-Z])/', $function, $string);
 	}
@@ -156,7 +164,14 @@ class Pdf {
 			$string[0] = strtoupper($string[0]);
 		}
 		
-		$function = create_function('$c', 'return strtoupper($c[1]);');
+		if (function_exists('create_function')) {
+		    $function = create_function('$c', 'return strtoupper($c[1]);');
+		}
+		else {
+		    $function = function($c) {
+			return strtolower($c[1]);
+		    };
+		}
 		
 		return preg_replace_callback('/_([a-z])/', $function, $string);
 	}
